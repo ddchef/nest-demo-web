@@ -34,6 +34,9 @@ router.beforeEach((to, from, next) => {
   if (!hasToken() && to.path !== '/login') {
     next('/login')
   }
+  if (hasToken() && to.path === '/login') {
+    next('/')
+  }
   next()
 })
 

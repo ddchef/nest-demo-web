@@ -9,3 +9,7 @@ export function getToken () {
 export function setToken (token) {
   Cookie.set('dd_token', 'Bearer ' + token)
 }
+
+export function delToken () {
+  Cookie.remove('dd_token')
+}
