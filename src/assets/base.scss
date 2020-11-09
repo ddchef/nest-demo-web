@@ -1,0 +1,11 @@
+$danger: #F56C6C;
+.el-button_danger{
+  color: $danger;
+  &:hover{
+    color: $danger;
+  }
+}
+.app-block{
+  width: 100%;
+  padding: 16px;
+}
