@@ -22,6 +22,7 @@ import { required } from '@/utils/rules'
 import { postRole, getRole, putRole } from './api'
 export default {
   name: 'RoleUpdate',
+  inject: ['eventBus'],
   data () {
     return {
       form: {},
@@ -34,6 +35,9 @@ export default {
   computed: {
     id () {
       return this.$route.params.id
+    },
+    api () {
+      return this.id ? putRole : postRole
     }
   },
   created () {
@@ -47,23 +51,13 @@ export default {
     handlerSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
-          if (this.id) {
-            putRole({ id: this.id }, this.form).then(data => {
-              this.$message.success('更新成功')
-              this.$router.go(-1)
-            }).catch(err => {
-              console.log(err)
-              this.$message.error('更新失败')
-            })
-          } else {
-            postRole(this.form).then(data => {
-              this.$message.success('新增成功')
-              this.$router.go(-1)
-            }).catch(err => {
-              console.log(err)
-              this.$message.error('新增失败')
-            })
-          }
+          this.api(this.form, { id: this.id }).then(data => {
+            this.$message.success(data.message)
+            this.$router.go(-1)
+          }).catch(err => {
+            console.log(err)
+            this.$message.error('操作失败')
+          })
         }
       })
     }

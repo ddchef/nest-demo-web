@@ -23,10 +23,15 @@
 <script>
 import { getRoles, deleteRole } from './api'
 import TableOperate from '@/components/table-operate'
+import EventBus from '@/utils/eventBus'
+const eventBus = new EventBus()
 export default {
   name: 'Role',
   components: {
     TableOperate
+  },
+  provide: {
+    eventBus
   },
   data () {
     return {
@@ -48,6 +53,7 @@ export default {
   },
   created () {
     this.getData()
+    eventBus.on('refresh', this.getData)
   },
   methods: {
     getData () {

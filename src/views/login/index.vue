@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div v-show="!signUp" class="sign-in animate__animated" :class="signInClass">
-      <div>用户登录</div>
+      <div style="text-align:center">用户登录</div>
       <el-form ref="form" :model="form" :rules="rules">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="sign-up" v-show="signUp">
-      <div>用户注册</div>
+      <div style="text-align:center">用户注册</div>
       <el-form ref="signUp" :model="signUpForm" :rules="rules">
         <el-form-item label="用户名" prop="user">
           <el-input v-model="signUpForm.user" placeholder="请输入用户名"></el-input>

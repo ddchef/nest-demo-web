@@ -8,8 +8,8 @@
       router
       @select="handleSelect"
     >
-      <el-menu-item index="user">用户管理</el-menu-item>
-      <el-menu-item index="role">角色管理</el-menu-item>
+      <el-menu-item index="/user">用户管理</el-menu-item>
+      <el-menu-item index="/role">角色管理</el-menu-item>
     </el-menu>
   </el-header>
 </template>

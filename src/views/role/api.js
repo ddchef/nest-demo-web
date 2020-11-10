@@ -15,7 +15,7 @@ export function getRole (pathParams) {
   })
 }
 
-export function putRole (pathParams, data) {
+export function putRole (data, pathParams) {
   return fetch({
     url: '/api/v1/role/{id}',
     method: 'put',
