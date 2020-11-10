@@ -55,6 +55,7 @@ export default {
       }
     }
   },
+  inject: ['eventBus'],
   computed: {
     id () {
       return this.$route.params.id
@@ -77,6 +78,7 @@ export default {
           if (this.id) {
             putUser({ id: this.id }, this.form).then(data => {
               this.$message.success('更新成功')
+              this.eventBus.emit('refresh')
               this.$router.go(-1)
             }).catch(err => {
               console.log(err)
