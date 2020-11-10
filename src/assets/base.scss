@@ -1,4 +1,7 @@
 $danger: #F56C6C;
+html,body,#app,.el-container{
+  height: 100%;
+}
 .el-button_danger{
   color: $danger;
   &:hover{

@@ -10,10 +10,7 @@
         </el-button>
       </div>
       <el-table border :data="data" height="500">
-        <el-table-column label="用户名" prop="user"></el-table-column>
-        <el-table-column label="姓名" prop="name"></el-table-column>
-        <el-table-column label="地址" prop="address"></el-table-column>
-        <el-table-column label="更新时间" prop="update_time"></el-table-column>
+        <el-table-column label="角色名称" prop="roleName"></el-table-column>
         <el-table-column label="操作项" prop="operate" width="200">
           <template slot-scope="{row}">
             <table-operate :operates="operates" @click="handleOperate(row,$event)"/>
@@ -24,10 +21,10 @@
   </app-view>
 </template>
 <script>
-import { getUsers, deleteUser } from './api'
+import { getRoles, deleteRole } from './api'
 import TableOperate from '@/components/table-operate'
 export default {
-  name: 'User',
+  name: 'Role',
   components: {
     TableOperate
   },
@@ -54,14 +51,14 @@ export default {
   },
   methods: {
     getData () {
-      getUsers().then((data) => {
+      getRoles().then((data) => {
         this.data = data
       })
     },
     handleOperate (row, action) {
       switch (action.code) {
         case 'delete':
-          deleteUser(row).then(({ message }) => {
+          deleteRole(row).then(({ message }) => {
             this.$notify.success({
               title: message
             })
@@ -69,11 +66,11 @@ export default {
           })
           break
         case 'edit':
-          this.$router.push({ name: 'user-edit', params: { id: row.id } })
+          this.$router.push({ name: 'role-edit', params: { id: row.id } })
       }
     },
     handeHeaderOperate (code) {
-      this.$router.push({ name: 'user-add' })
+      this.$router.push({ name: 'role-add' })
     }
   }
 }

@@ -18,7 +18,7 @@
     <div class="sign-up" v-show="signUp">
       <div>用户注册</div>
       <el-form ref="signUp" :model="signUpForm" :rules="rules">
-        <el-form-item label="用户名" prop="username">
+        <el-form-item label="用户名" prop="user">
           <el-input v-model="signUpForm.user" placeholder="请输入用户名"></el-input>
         </el-form-item>
         <el-form-item label="姓名" prop="name">
@@ -46,10 +46,14 @@ export default {
   name: 'Login',
   data () {
     return {
-      form: {},
+      form: {
+        username: '',
+        password: ''
+      },
       signUp: false,
       signUpForm: {},
       rules: {
+        user: [required],
         username: [required],
         password: [required]
       },
@@ -74,7 +78,14 @@ export default {
       this.$refs.signUp.validate(valid => {
         if (valid) {
           postUser(this.signUpForm).then(data => {
-            this.$message('注册成功')
+            this.$message.success('注册成功')
+            this.signUp = false
+            this.form.username = this.signUpForm.user
+            this.form.password = this.signUpForm.password
+            this.signUpForm = {}
+          }).catch(err => {
+            console.log(err)
+            this.$message.error('注册失败')
           })
         }
       })

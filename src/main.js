@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import ElementUi from 'element-ui'
+import components from './components/index'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'animate.css/animate.css'
 import '@/assets/base.scss'
@@ -11,6 +12,7 @@ import '@/assets/base.scss'
 Vue.config.productionTip = false
 
 Vue.use(ElementUi)
+Vue.use(components)
 new Vue({
   router,
   store,

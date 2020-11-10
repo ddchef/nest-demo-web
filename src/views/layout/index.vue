@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <el-container direction="vertical">
     <layout-header/>
-    <el-container>
+    <el-main style="position: relative;padding:8px;">
       <router-view/>
-    </el-container>
-  </div>
+    </el-main>
+  </el-container>
 </template>
 <script>
 import LayoutHeader from './header'

@@ -23,4 +23,13 @@ axios.interceptors.response.use(response => {
   }
 })
 
-export default axios
+function fetch (config) {
+  if (config.pathParams) {
+    config.url = config.url.replace(/\{(\w+)\}/, (_, key) => {
+      return config.pathParams[key]
+    })
+  }
+  return axios(config)
+}
+
+export default fetch
