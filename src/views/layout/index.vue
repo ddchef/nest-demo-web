@@ -8,10 +8,17 @@
 </template>
 <script>
 import LayoutHeader from './header'
+import { mapActions } from 'vuex'
 export default {
   name: 'Layout',
   components: {
     LayoutHeader
+  },
+  created () {
+    this.getProfile()
+  },
+  methods: {
+    ...mapActions(['getProfile'])
   }
 }
 </script>

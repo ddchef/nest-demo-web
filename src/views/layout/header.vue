@@ -1,29 +1,55 @@
 <template>
-  <el-header class="header" height="50px">
+  <el-header class="header" height="60px">
     <div class="header-title">管理平台</div>
-    <el-menu
-      class="header-el-menu"
-      :default-active="activeIndex"
-      mode="horizontal"
-      router
-      @select="handleSelect"
-    >
-      <el-menu-item index="/user">用户管理</el-menu-item>
-      <el-menu-item index="/role">角色管理</el-menu-item>
-    </el-menu>
+    <div style="flex:1">
+      <el-menu
+        class="header-el-menu"
+        :default-active="activeIndex"
+        mode="horizontal"
+        router
+        @select="handleSelect"
+      >
+        <el-menu-item index="/user">用户管理</el-menu-item>
+        <el-menu-item index="/role">角色管理</el-menu-item>
+      </el-menu>
+    </div>
+    <div>
+      <el-dropdown @command="handleCommand">
+        <avatar class="header-avatar" :size="40" :username="profile.name||''"/>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="logout">注销</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </el-header>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import Avatar from 'vue-avatar'
+import { delToken } from '@/utils/auth'
 export default {
   name: 'Header',
+  components: {
+    Avatar
+  },
   data () {
     return {
       activeIndex: 'user'
     }
   },
+  computed: {
+    ...mapGetters(['profile'])
+  },
+  created () {
+    // console.log(this.profile)
+  },
   methods: {
     handleSelect (select) {
       console.log(select)
+    },
+    handleCommand (code) {
+      delToken()
+      window.location.href = '/login'
     }
   }
 }
@@ -34,7 +60,7 @@ export default {
   display: flex;
   .header-title{
     color: #fff;
-    line-height: 50px;
+    line-height: 60px;
     width: 400px;
   }
   .header-el-menu.el-menu--horizontal{
@@ -60,6 +86,10 @@ export default {
         background-color: rgb(64, 158, 255);
       }
     }
+  }
+  .header-avatar{
+    margin: 10px 0;
+    cursor: pointer;
   }
 }
 </style>
