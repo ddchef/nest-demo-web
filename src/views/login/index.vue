@@ -84,8 +84,7 @@ export default {
             this.form.password = this.signUpForm.password
             this.signUpForm = {}
           }).catch(err => {
-            console.log(err)
-            this.$message.error('注册失败')
+            this.$message.error(err.message)
           })
         }
       })

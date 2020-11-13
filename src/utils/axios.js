@@ -21,6 +21,7 @@ axios.interceptors.response.use(response => {
     delToken()
     router.replace({ name: 'login' })
   }
+  return Promise.reject(error.response.data)
 })
 
 function fetch (config) {

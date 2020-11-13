@@ -9,7 +9,7 @@ export function postLogin (data) {
 
 export function postUser (data) {
   return fetch({
-    url: '/api/v1/user',
+    url: '/api/v1/user/register',
     method: 'post',
     data
   })

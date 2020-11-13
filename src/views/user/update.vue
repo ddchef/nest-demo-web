@@ -9,11 +9,6 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="密码" prop="password">
-              <el-input v-model="form.password" placeholder="请输入密码"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="角色" prop="roleId">
               <el-select v-model="form.roleId" placeholder="请选择角色">
                 <el-option v-for="role in roles" :key="role.id" :value="role.id" :label="role.roleName"/>
@@ -49,9 +44,7 @@ export default {
       form: {},
       roles: [],
       rules: {
-        user: [required],
-        username: [required],
-        password: [required]
+        user: [required]
       }
     }
   },
