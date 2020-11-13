@@ -7,6 +7,14 @@ export function getRoles (data) {
   })
 }
 
+export function getPermission (data) {
+  return fetch({
+    url: '/api/v1/permission',
+    method: 'get',
+    data
+  })
+}
+
 export function getRole (pathParams) {
   return fetch({
     url: '/api/v1/role/{id}',

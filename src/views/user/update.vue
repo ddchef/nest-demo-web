@@ -52,6 +52,9 @@ export default {
   computed: {
     id () {
       return this.$route.params.id
+    },
+    api () {
+      return this.id ? putUser : postUser
     }
   },
   created () {
@@ -68,24 +71,17 @@ export default {
     handlerSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
-          if (this.id) {
-            putUser({ id: this.id }, this.form).then(data => {
-              this.$message.success('更新成功')
-              this.eventBus.emit('refresh')
-              this.$router.go(-1)
-            }).catch(err => {
-              console.log(err)
-              this.$message.error('更新失败')
-            })
-          } else {
-            postUser(this.form).then(data => {
-              this.$message.success('新增成功')
-              this.$router.go(-1)
-            }).catch(err => {
-              console.log(err)
-              this.$message.error('新增失败')
-            })
-          }
+          this.api(this.form, { id: this.id }).then(data => {
+            if (this.id) {
+              this.$notify.success({ title: data.message })
+            } else {
+              this.$alert(data.password, '新建成功')
+            }
+            this.eventBus.emit('refresh')
+            this.$router.go(-1)
+          }).catch(err => {
+            this.$message.error(err.message)
+          })
         }
       })
     }

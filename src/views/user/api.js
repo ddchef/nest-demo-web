@@ -15,7 +15,7 @@ export function getUser (pathParams) {
   })
 }
 
-export function putUser (pathParams, data) {
+export function putUser (data, pathParams) {
   return fetch({
     url: '/api/v1/user/{id}',
     method: 'put',

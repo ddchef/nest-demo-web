@@ -8,6 +8,13 @@
               <el-input v-model="form.roleName" placeholder="请输入角色名称"></el-input>
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="权限" prop="permissionCode">
+              <el-select style="width:100%" multiple v-model="form.permissionCode" placeholder="请选择权限">
+                <el-option v-for="item in permissions" :key="item.permissionCode" :label="item.permissionName" :value="item.permissionCode"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
       <div style="text-align:center">
@@ -19,14 +26,14 @@
 </template>
 <script>
 import { required } from '@/utils/rules'
-import { postRole, getRole, putRole } from './api'
+import { postRole, getRole, putRole, getPermission } from './api'
 export default {
   name: 'RoleUpdate',
   inject: ['eventBus'],
   data () {
     return {
       form: {},
-      roles: [],
+      permissions: [],
       rules: {
         roleName: [required]
       }
@@ -41,6 +48,10 @@ export default {
     }
   },
   created () {
+    console.log(getPermission)
+    getPermission().then((data) => {
+      this.permissions = data
+    })
     if (this.id) {
       getRole({ id: this.id }).then((data) => {
         this.form = data
@@ -55,8 +66,7 @@ export default {
             this.$message.success(data.message)
             this.$router.go(-1)
           }).catch(err => {
-            console.log(err)
-            this.$message.error('操作失败')
+            this.$message.error(err.message)
           })
         }
       })
