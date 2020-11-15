@@ -4,17 +4,22 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="角色名称" prop="roleName">
-              <el-input v-model="form.roleName" placeholder="请输入角色名称"></el-input>
+            <el-form-item label="权限名称" prop="name">
+              <el-input v-model="form.name" placeholder="请输入权限名称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="权限" prop="permissionCode">
-              <el-select style="width:100%" multiple v-model="form.permissionCode" placeholder="请选择权限">
-                <el-option v-for="item in permissions" :key="item.code" :label="item.name" :value="item.code"></el-option>
-              </el-select>
+            <el-form-item label="权限Code" prop="code">
+              <el-input v-model="form.code" placeholder="请输入权限Code"></el-input>
             </el-form-item>
           </el-col>
+          <!-- <el-col :span="12">
+            <el-form-item label="所属模块" prop="moduleCode">
+              <el-select style="width:100%" multiple v-model="form.moduleCode" placeholder="请选择权限">
+                <el-option v-for="item in permissions" :key="item.permissionCode" :label="item.permissionName" :value="item.permissionCode"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col> -->
         </el-row>
       </el-form>
       <div style="text-align:center">
@@ -26,7 +31,7 @@
 </template>
 <script>
 import { required } from '@/utils/rules'
-import { postRole, getRole, putRole, getPermission } from './api'
+import { postPermission, getPermission, putPermission } from './api'
 export default {
   name: 'RoleUpdate',
   inject: ['eventBus'],
@@ -35,24 +40,23 @@ export default {
       form: {},
       permissions: [],
       rules: {
-        roleName: [required]
+        name: [required],
+        code: [required]
       }
     }
   },
   computed: {
-    id () {
-      return this.$route.params.id
+    code () {
+      return this.$route.params.code
     },
     api () {
-      return this.id ? putRole : postRole
+      return this.code ? putPermission : postPermission
     }
   },
   created () {
-    getPermission().then((data) => {
-      this.permissions = data
-    })
-    if (this.id) {
-      getRole({ id: this.id }).then((data) => {
+    console.log(this.code)
+    if (this.code) {
+      getPermission({ code: this.code }).then((data) => {
         this.form = data
       })
     }
@@ -61,7 +65,7 @@ export default {
     handlerSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.api(this.form, { id: this.id }).then(data => {
+          this.api(this.form, { code: this.code }).then(data => {
             this.$notify.success({ title: data.message })
             this.eventBus.emit('refresh')
             this.$router.go(-1)

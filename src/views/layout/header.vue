@@ -11,6 +11,7 @@
       >
         <el-menu-item index="/user">用户管理</el-menu-item>
         <el-menu-item index="/role">角色管理</el-menu-item>
+        <el-menu-item index="/permission">权限管理</el-menu-item>
       </el-menu>
     </div>
     <div>

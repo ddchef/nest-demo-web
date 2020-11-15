@@ -24,7 +24,7 @@ const routes = [
             meta: {
               title: '用户新增'
             },
-            component: () => import(/* webpackChunkName: "vue-add" */ '@/views/user/update.vue')
+            component: () => import(/* webpackChunkName: "user-add" */ '@/views/user/update.vue')
           },
           {
             path: 'edit/:id',
@@ -32,7 +32,7 @@ const routes = [
             meta: {
               title: '用户编辑'
             },
-            component: () => import(/* webpackChunkName: "vue-edit" */ '@/views/user/update.vue')
+            component: () => import(/* webpackChunkName: "user-edit" */ '@/views/user/update.vue')
           }
         ]
       },
@@ -50,7 +50,7 @@ const routes = [
             meta: {
               title: '角色新增'
             },
-            component: () => import(/* webpackChunkName: "vue-add" */ '@/views/role/update.vue')
+            component: () => import(/* webpackChunkName: "role-add" */ '@/views/role/update.vue')
           },
           {
             path: 'edit/:id',
@@ -58,7 +58,33 @@ const routes = [
             meta: {
               title: '角色编辑'
             },
-            component: () => import(/* webpackChunkName: "vue-edit" */ '@/views/role/update.vue')
+            component: () => import(/* webpackChunkName: "role-edit" */ '@/views/role/update.vue')
+          }
+        ]
+      },
+      {
+        path: 'permission',
+        name: 'permission',
+        meta: {
+          title: '权限管理'
+        },
+        component: () => import(/* webpackChunkName: "permission" */ '@/views/permission/index.vue'),
+        children: [
+          {
+            path: 'add',
+            name: 'permission-add',
+            meta: {
+              title: '权限新增'
+            },
+            component: () => import(/* webpackChunkName: "permission-add" */ '@/views/permission/update.vue')
+          },
+          {
+            path: 'edit/:code',
+            name: 'permission-edit',
+            meta: {
+              title: '权限编辑'
+            },
+            component: () => import(/* webpackChunkName: "permission-edit" */ '@/views/permission/update.vue')
           }
         ]
       }

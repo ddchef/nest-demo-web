@@ -6,3 +6,10 @@ export function getProfile () {
     method: 'get'
   })
 }
+
+export function getPermission () {
+  return fetch({
+    url: '/api/v1/role/permissions',
+    method: 'get'
+  })
+}

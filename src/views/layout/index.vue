@@ -16,9 +16,10 @@ export default {
   },
   created () {
     this.getProfile()
+    this.getPremissions()
   },
   methods: {
-    ...mapActions(['getProfile'])
+    ...mapActions(['getProfile', 'getPremissions'])
   }
 }
 </script>
