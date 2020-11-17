@@ -13,13 +13,13 @@
               <el-input v-model="form.code" placeholder="请输入权限Code"></el-input>
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="12">
+          <el-col :span="12">
             <el-form-item label="所属模块" prop="moduleCode">
-              <el-select style="width:100%" multiple v-model="form.moduleCode" placeholder="请选择权限">
-                <el-option v-for="item in permissions" :key="item.permissionCode" :label="item.permissionName" :value="item.permissionCode"></el-option>
+              <el-select style="width:100%" v-model="form.moduleCode" placeholder="请选择模块">
+                <el-option v-for="item in modules" :key="item.code" :label="item.name" :value="item.code"></el-option>
               </el-select>
             </el-form-item>
-          </el-col> -->
+          </el-col>
         </el-row>
       </el-form>
       <div style="text-align:center">
@@ -31,7 +31,7 @@
 </template>
 <script>
 import { required } from '@/utils/rules'
-import { postPermission, getPermission, putPermission } from './api'
+import { postPermission, getPermission, putPermission, getAllModules } from './api'
 export default {
   name: 'RoleUpdate',
   inject: ['eventBus'],
@@ -39,6 +39,7 @@ export default {
     return {
       form: {},
       permissions: [],
+      modules: [],
       rules: {
         name: [required],
         code: [required]
@@ -54,7 +55,9 @@ export default {
     }
   },
   created () {
-    console.log(this.code)
+    getAllModules().then(data => {
+      this.modules = data
+    })
     if (this.code) {
       getPermission({ code: this.code }).then((data) => {
         this.form = data

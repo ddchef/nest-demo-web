@@ -39,3 +39,10 @@ export function putPermission (data, pathParams) {
     data
   })
 }
+
+export function getAllModules () {
+  return fetch({
+    url: '/api/v1/module',
+    method: 'get'
+  })
+}

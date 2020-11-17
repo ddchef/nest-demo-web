@@ -63,7 +63,9 @@ export default {
     })
     if (this.id) {
       getUser({ id: this.id }).then((data) => {
-        data.roleId = data.role.id
+        if (data.role) {
+          data.roleId = data.role.id
+        }
         this.form = data
       })
     }
