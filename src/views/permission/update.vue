@@ -14,9 +14,9 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="所属模块" prop="moduleCode">
-              <el-select style="width:100%" v-model="form.moduleCode" placeholder="请选择模块">
-                <el-option v-for="item in modules" :key="item.code" :label="item.name" :value="item.code"></el-option>
+            <el-form-item label="父级权限" prop="parentCode">
+              <el-select v-model="form.parentCode" placeholder="请选择父级权限">
+                <el-option v-for="opt in permissions" :key="opt.code" :label="opt.name" :value="opt.code"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -31,7 +31,7 @@
 </template>
 <script>
 import { required } from '@/utils/rules'
-import { postPermission, getPermission, putPermission, getAllModules } from './api'
+import { postPermission, getPermission, putPermission, getAllPermission } from './api'
 export default {
   name: 'RoleUpdate',
   inject: ['eventBus'],
@@ -55,8 +55,8 @@ export default {
     }
   },
   created () {
-    getAllModules().then(data => {
-      this.modules = data
+    getAllPermission().then(data => {
+      this.permissions = data
     })
     if (this.code) {
       getPermission({ code: this.code }).then((data) => {

@@ -2,10 +2,10 @@
   <app-view>
     <app-block>
       <div class="table-header-operate">
-        <el-button type="primary" size="small" @click="handeHeaderOperate('add')">
+        <el-button v-if="permissions['user_add']" type="primary" size="small" @click="handeHeaderOperate('add')">
           新增
         </el-button>
-        <el-button type="danger" size="small">
+        <el-button v-if="permissions['user_delete']" type="danger" size="small">
           删除
         </el-button>
       </div>
@@ -27,7 +27,21 @@
 import { getUsers, deleteUser } from './api'
 import TableOperate from '@/components/table-operate'
 import EventBus from '@/utils/eventBus'
+import { mapGetters } from 'vuex'
 const eventBus = new EventBus()
+const operates = [
+  {
+    code: 'edit',
+    label: '编辑'
+  },
+  {
+    code: 'delete',
+    label: '删除',
+    type: 'danger',
+    popover: true,
+    title: '确认删除？'
+  }
+]
 export default {
   name: 'User',
   components: {
@@ -38,20 +52,13 @@ export default {
   },
   data () {
     return {
-      data: [],
-      operates: [
-        {
-          code: 'edit',
-          label: '编辑'
-        },
-        {
-          code: 'delete',
-          label: '删除',
-          type: 'danger',
-          popover: true,
-          title: '确认删除？'
-        }
-      ]
+      data: []
+    }
+  },
+  computed: {
+    ...mapGetters(['permissions']),
+    operates () {
+      return operates.filter(item => this.permissions[item.code])
     }
   },
   created () {

@@ -29,7 +29,14 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    profile: (state) => state.profile
+    profile: (state) => state.profile,
+    permissions: (state) => {
+      const p = {}
+      state.permissions.forEach(item => {
+        p[item.code] = item.name
+      })
+      return p
+    }
   },
   modules: {
   }

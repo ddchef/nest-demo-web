@@ -12,7 +12,7 @@
       <el-table border :data="data" height="500">
         <el-table-column label="权限名" prop="name"></el-table-column>
         <el-table-column label="权限Code" prop="code"></el-table-column>
-        <el-table-column label="所属模块" prop="moduleCode"></el-table-column>
+        <el-table-column label="父级权限" prop="parentCode"></el-table-column>
         <el-table-column label="操作项" prop="operate" width="200">
           <template slot-scope="{row}">
             <table-operate :operates="operates" @click="handleOperate(row,$event)"/>

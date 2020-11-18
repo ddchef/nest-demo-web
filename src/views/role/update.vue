@@ -8,11 +8,11 @@
               <el-input v-model="form.roleName" placeholder="请输入角色名称"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="24">
             <el-form-item label="权限" prop="permissionCode">
-              <el-select style="width:100%" multiple v-model="form.permissionCode" placeholder="请选择权限">
-                <el-option v-for="item in permissions" :key="item.code" :label="item.name" :value="item.code"></el-option>
-              </el-select>
+              <el-transfer :titles="['待选择','已选择']" v-model="form.permissionCode" :data="permissions" :props="{key:'code'}">
+                <span slot-scope="{ option }">{{option.code}}-{{ option.name }}</span>
+              </el-transfer>
             </el-form-item>
           </el-col>
         </el-row>
