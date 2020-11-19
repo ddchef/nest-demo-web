@@ -97,7 +97,7 @@ export default {
 <style lang="scss" scoped>
 .login {
   max-width: 400px;
-  margin: 30px auto;
+  margin: 0px auto;
   .sign-in,.sign-up{
     padding: 10px;
     border-radius: 5px;

@@ -8,6 +8,7 @@ import components from './components/index'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'animate.css/animate.css'
 import '@/assets/base.scss'
+import 'normalize.css'
 
 Vue.config.productionTip = false
 
