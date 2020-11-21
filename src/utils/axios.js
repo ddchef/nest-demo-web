@@ -1,6 +1,7 @@
 import Axios from 'axios'
 import { getToken, delToken } from '@/utils/auth'
 import router from '@/router/index'
+import { Message } from 'element-ui'
 
 const axios = Axios.create({
   timeout: 1000
@@ -20,6 +21,9 @@ axios.interceptors.response.use(response => {
   if (error.response.status === 401) {
     delToken()
     router.replace({ name: 'login' })
+  }
+  if (error.response.status === 403) {
+    Message.error(error.response.data.message)
   }
   return Promise.reject(error.response.data)
 })

@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     handleSelect (select) {
-      console.log(select)
     },
     handleCommand (code) {
       delToken()

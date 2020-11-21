@@ -2,18 +2,15 @@
   <app-view>
     <app-block>
       <div class="table-header-operate">
-        <el-button type="primary" size="small" @click="handeHeaderOperate('add')">
-          新增
-        </el-button>
-        <el-button type="danger" size="small">
-          删除
+        <el-button v-for="operate in headerOperates" :key="operate.code" :type="operate.type||'primary'" size="small" @click="handeHeaderOperate(operate.code)">
+          {{operate.label}}
         </el-button>
       </div>
       <el-table border :data="data" height="500">
         <el-table-column label="角色名称" prop="roleName"></el-table-column>
         <el-table-column label="操作项" prop="operate" width="200">
           <template slot-scope="{row}">
-            <table-operate :operates="operates" @click="handleOperate(row,$event)"/>
+            <table-operate :operates="tableOperates" @click="handleOperate(row,$event)"/>
           </template>
         </el-table-column>
       </el-table>
@@ -22,38 +19,18 @@
 </template>
 <script>
 import { getRoles, deleteRole } from './api'
-import TableOperate from '@/components/table-operate'
-import EventBus from '@/utils/eventBus'
-const eventBus = new EventBus()
+import base from '@/components/mixin/base'
 export default {
   name: 'Role',
-  components: {
-    TableOperate
-  },
-  provide: {
-    eventBus
-  },
+  mixins: [base],
   data () {
     return {
-      data: [],
-      operates: [
-        {
-          code: 'edit',
-          label: '编辑'
-        },
-        {
-          code: 'delete',
-          label: '删除',
-          type: 'danger',
-          popover: true,
-          title: '确认删除？'
-        }
-      ]
+      data: []
     }
   },
   created () {
     this.getData()
-    eventBus.on('refresh', this.getData)
+    this.eventBus.on('refresh', this.getData)
   },
   methods: {
     getData () {
@@ -63,7 +40,7 @@ export default {
     },
     handleOperate (row, action) {
       switch (action.code) {
-        case 'delete':
+        case 'role_delete':
           deleteRole(row).then(({ message }) => {
             this.$notify.success({
               title: message
@@ -71,7 +48,7 @@ export default {
             this.getData()
           })
           break
-        case 'edit':
+        case 'role_edit':
           this.$router.push({ name: 'role-edit', params: { id: row.id } })
       }
     },
