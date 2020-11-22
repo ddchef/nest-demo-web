@@ -52,11 +52,11 @@ export default {
           })
           break
         case 'user_edit':
-          this.$router.push({ name: 'user-edit', params: { id: row.id } })
+          this.$router.push({ name: 'user_edit', params: { id: row.id } })
       }
     },
     handeHeaderOperate (code) {
-      this.$router.push({ name: 'user-add' })
+      this.$router.push({ name: 'user_add' })
     }
   }
 }

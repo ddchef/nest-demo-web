@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     handleOperate (operate) {
-      console.log(operate)
       this.$emit('click', operate)
     }
   }

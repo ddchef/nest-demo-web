@@ -9,9 +9,7 @@
         router
         @select="handleSelect"
       >
-        <el-menu-item index="/user">用户管理</el-menu-item>
-        <el-menu-item index="/role">角色管理</el-menu-item>
-        <el-menu-item index="/permission">权限管理</el-menu-item>
+        <el-menu-item :index="menu.path" v-for="menu in menus" :key="menu.id">{{menu.title}}</el-menu-item>
       </el-menu>
     </div>
     <div>
@@ -39,7 +37,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['profile'])
+    ...mapGetters(['profile', 'menus'])
   },
   created () {
     // console.log(this.profile)

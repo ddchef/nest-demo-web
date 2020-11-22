@@ -6,7 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     profile: {},
-    permissions: []
+    permissions: {},
+    routes: [],
+    menus: []
   },
   mutations: {
     setProfile (state, profile) {
@@ -14,6 +16,12 @@ export default new Vuex.Store({
     },
     setPermissions (state, data) {
       state.permissions = data
+    },
+    setRoutes (state, routes) {
+      state.routes = routes
+    },
+    setMenus (state, menus) {
+      state.menus = menus
     }
   },
   actions: {
@@ -22,21 +30,19 @@ export default new Vuex.Store({
         context.commit('setProfile', data)
       })
     },
-    getPremissions (context) {
-      getPermission().then((data) => {
-        context.commit('setPermissions', data)
+    async getPremissions (context) {
+      const data = await getPermission()
+      const p = {}
+      data.forEach(item => {
+        p[item.code] = item.name
       })
+      context.commit('setPermissions', p)
     }
   },
   getters: {
     profile: (state) => state.profile,
-    permissions: (state) => {
-      const p = {}
-      state.permissions.forEach(item => {
-        p[item.code] = item.name
-      })
-      return p
-    }
+    permissions: (state) => state.permissions,
+    menus: (state) => state.menus
   },
   modules: {
   }

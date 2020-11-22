@@ -69,7 +69,7 @@ export default {
         if (valid) {
           postLogin(this.form).then((data) => {
             setToken(data.token)
-            this.$router.push({ name: 'user' })
+            this.$router.push({ path: '/' })
           }).catch(err => {
             this.$message.error(err.message)
           })

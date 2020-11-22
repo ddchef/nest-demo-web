@@ -51,11 +51,11 @@ export default {
           })
           break
         case 'permission_edit':
-          this.$router.push({ name: 'permission-edit', params: { code: row.code } })
+          this.$router.push({ name: 'permission_edit', params: { code: row.code } })
       }
     },
     handeHeaderOperate (code) {
-      this.$router.push({ name: 'permission-add' })
+      this.$router.push({ name: 'permission_add' })
     }
   }
 }
