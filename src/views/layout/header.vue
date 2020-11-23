@@ -2,15 +2,7 @@
   <el-header class="header" height="60px">
     <div class="header-title">管理平台</div>
     <div style="flex:1">
-      <el-menu
-        class="header-el-menu"
-        :default-active="activeIndex"
-        mode="horizontal"
-        router
-        @select="handleSelect"
-      >
-        <el-menu-item :index="menu.path" v-for="menu in menus" :key="menu.id">{{menu.title}}</el-menu-item>
-      </el-menu>
+      <render-menus :menus="menus"/>
     </div>
     <div>
       <el-dropdown @command="handleCommand">
@@ -26,10 +18,12 @@
 import { mapGetters } from 'vuex'
 import Avatar from 'vue-avatar'
 import { delToken } from '@/utils/auth'
+import RenderMenus from '@/components/render-menus'
 export default {
   name: 'Header',
   components: {
-    Avatar
+    Avatar,
+    RenderMenus
   },
   data () {
     return {

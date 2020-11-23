@@ -1,3 +1,4 @@
+import _import from './_import'
 function deepLoopDecorateRoutes (routes = [], permissions) {
   return routes.map(route => {
     route.meta = {}
@@ -12,8 +13,15 @@ function deepLoopDecorateRoutes (routes = [], permissions) {
     if (!permissions[route.id]) {
       return undefined
     }
+    if (route.component) {
+      route.component = _import(route.component)
+    }
     route.props = true
     route.children = deepLoopDecorateRoutes(route.children, permissions)
+    if (!route.component && route.children.length > 0) {
+      route.component = _import('/layout/supplement.vue')
+      route.redirect = { name: route.children[0].name }
+    }
     return route
   }).filter(v => v)
 }

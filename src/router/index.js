@@ -33,7 +33,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  console.log(to, hasToken())
   // 判断是否有token
   if (hasToken()) {
     console.log('permissions', isEmpty(store.state.permissions))
@@ -65,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
       next({ ...to, replace: true })
     }
     // 禁止进入login页面
-    if (to.path === '/login') {
+    if (to.name === 'login') {
       return next({ path: '/', replace: true })
     }
     if (to.path === '/') {
@@ -74,7 +73,6 @@ router.beforeEach(async (to, from, next) => {
     // 允许进入
     return next()
   } else {
-    console.log(to.path, whiteList.includes(to.path))
     if (whiteList.includes(to.path)) {
       return next()
     }
