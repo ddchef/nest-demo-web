@@ -1,7 +1,7 @@
 <template>
   <el-header class="header" height="60px">
     <div class="header-title">管理平台</div>
-    <div style="flex:1">
+    <div>
       <render-menus :menus="menus"/>
     </div>
     <div>
@@ -53,7 +53,8 @@ export default {
   .header-title{
     color: #fff;
     line-height: 60px;
-    width: 400px;
+    min-width: 400px;
+    flex: 1;
   }
   .header-el-menu.el-menu--horizontal{
     background-color: transparent;

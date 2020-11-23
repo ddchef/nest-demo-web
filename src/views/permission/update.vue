@@ -15,7 +15,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="父级权限" prop="parentCode">
-              <el-select v-model="form.parentCode" placeholder="请选择父级权限">
+              <el-select v-model="form.parentCode" clearable  placeholder="请选择父级权限">
                 <el-option v-for="opt in permissions" :key="opt.code" :label="opt.name" :value="opt.code"></el-option>
               </el-select>
             </el-form-item>

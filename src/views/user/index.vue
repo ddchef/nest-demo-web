@@ -6,7 +6,7 @@
           {{operate.label}}
         </el-button>
       </div>
-      <el-table border :data="data" height="500">
+      <el-table border :data="data">
         <el-table-column label="用户名" prop="user"></el-table-column>
         <el-table-column label="姓名" prop="name"></el-table-column>
         <el-table-column label="地址" prop="address"></el-table-column>

@@ -6,7 +6,7 @@
           {{operate.label}}
         </el-button>
       </div>
-      <el-table border :data="data" height="500">
+      <el-table border :data="data">
         <el-table-column label="角色名称" prop="roleName"></el-table-column>
         <el-table-column label="操作项" prop="operate" width="200">
           <template slot-scope="{row}">

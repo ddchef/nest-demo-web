@@ -13,7 +13,11 @@
           <el-breadcrumb-item v-for="(item,i) in breadcrumbs" :key="i" :to="{ path: item.path }">{{item.title}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
-      <slot/>
+      <div class="app-view-block">
+        <el-scrollbar style="height:100%">
+          <slot/>
+        </el-scrollbar>
+      </div>
       <router-view/>
     </div>
   </div>
@@ -42,6 +46,13 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .app-view{
+    .el-scrollbar__wrap{
+      overflow-x: hidden;
+    }
+  }
+</style>
 <style lang="scss" scoped>
 .app-view{
   position: absolute;
@@ -59,6 +70,13 @@ export default {
       height: 24px;
       padding: 10px 8px;
       margin-bottom: 8px;
+    }
+    .app-view-block{
+      height: calc(100% - 60px);
+      overflow: hidden;
+      .el-scrollbar__wrap{
+        overflow-x: hidden;
+      }
     }
   }
 }

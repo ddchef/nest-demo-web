@@ -6,7 +6,7 @@
           {{operate.label}}
         </el-button>
       </div>
-      <el-table border :data="data" height="500">
+      <el-table border :data="data">
         <el-table-column label="权限名" prop="name"></el-table-column>
         <el-table-column label="权限Code" prop="code"></el-table-column>
         <el-table-column label="父级权限" prop="parentCode"></el-table-column>
