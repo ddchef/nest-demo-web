@@ -69,5 +69,20 @@ export default [
         ]
       }
     ]
+  },
+  {
+    path: 'builder',
+    id: 'builder',
+    title: '打包管理',
+    isMenu: true,
+    children: [
+      {
+        path: 'task',
+        id: 'builder-task',
+        title: '任务管理',
+        isMenu: true,
+        component: '/builder-task/index.vue'
+      }
+    ]
   }
 ]
