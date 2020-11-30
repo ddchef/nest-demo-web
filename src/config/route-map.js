@@ -77,11 +77,19 @@ export default [
     isMenu: true,
     children: [
       {
-        path: 'task',
-        id: 'builder-task',
-        title: '任务管理',
+        path: 'rule',
+        id: 'builder_rule',
+        title: '打包规则',
         isMenu: true,
-        component: '/builder-task/index.vue'
+        component: '/builder-rule/index.vue',
+        children: [
+          {
+            path: 'add',
+            id: 'builder_rule_add',
+            title: '新增打包规则',
+            component: '/builder-rule/update.vue'
+          }
+        ]
       }
     ]
   }

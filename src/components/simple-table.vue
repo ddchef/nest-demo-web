@@ -4,11 +4,14 @@
       <slot name="table-header"/>
     </div>
     <el-table :data="data">
-      <el-table-column v-for="col in columns" :key="col.prop" :label="col.label" :prop="col.prop" :type="col.type">
-        <template v-if="col.slot" slot-scope="{$index,row}">
-          <slot :slot="col.prop" :$index="$index" :row="row"/>
-        </template>
-      </el-table-column>
+      <template v-for="col in columns">
+        <el-table-column v-if="col.columnSlot" :key="col.prop" v-bind="col">
+          <template slot-scope="scope">
+            <slot :name="col.prop" v-bind="scope"/>
+          </template>
+        </el-table-column>
+        <el-table-column v-else :key="col.prop" v-bind="col" />
+      </template>
     </el-table>
     <el-pagination
       hide-on-single-page

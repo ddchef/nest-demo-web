@@ -12,20 +12,20 @@ export default {
     }
   },
   methods: {
-    createMenus (h, menus) {
+    createMenus (h, menus, parentPath = '') {
       const menusNodes = menus.map(item => {
         if (Array.isArray(item.children) && item.children.length > 0) {
           return h(
             'el-submenu',
             {
               props: {
-                index: item.id
+                index: parentPath + '/' + item.path
               },
               key: item.id
             },
             [
               h('span', { slot: 'title' }, item.title),
-              ...this.createMenus(h, item.children)
+              ...this.createMenus(h, item.children, parentPath + '/' + item.path)
             ]
           )
         }
@@ -33,14 +33,13 @@ export default {
           'el-menu-item',
           {
             props: {
-              index: item.id
+              index: parentPath + '/' + item.path
             },
             key: item.id
           },
           item.title
         )
       })
-      console.log(menusNodes)
       return menusNodes
     }
   },
@@ -56,7 +55,7 @@ export default {
             router: true
           }
         },
-        this.createMenus(h, this.menus)
+        this.createMenus(h, this.menus, '')
       )
     )
   }

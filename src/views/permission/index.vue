@@ -1,21 +1,16 @@
 <template>
   <app-view>
     <app-block>
-      <div class="table-header-operate">
-        <el-button v-for="operate in headerOperates" :key="operate.code" :type="operate.type||'primary'" size="small" @click="handeHeaderOperate(operate.code)">
-          {{operate.label}}
-        </el-button>
-      </div>
-      <el-table border :data="data">
-        <el-table-column label="权限名" prop="name"></el-table-column>
-        <el-table-column label="权限Code" prop="code"></el-table-column>
-        <el-table-column label="父级权限" prop="parentCode"></el-table-column>
-        <el-table-column label="操作项" prop="operate" width="200">
-          <template slot-scope="{row}">
-            <table-operate :operates="tableOperates" @click="handleOperate(row,$event)"/>
-          </template>
-        </el-table-column>
-      </el-table>
+      <simple-table :columns="columns" :data="data">
+        <div slot="table-header" class="table-header-operate">
+          <el-button v-for="operate in headerOperates" :key="operate.code" :type="operate.type||'primary'" size="small" @click="handeHeaderOperate(operate.code)">
+            {{operate.label}}
+          </el-button>
+        </div>
+        <template slot="operate" slot-scope="{row}">
+          <table-operate :operates="tableOperates" @click="handleOperate(row,$event)"/>
+        </template>
+      </simple-table>
     </app-block>
   </app-view>
 </template>
@@ -27,7 +22,13 @@ export default {
   mixins: [base],
   data () {
     return {
-      data: []
+      data: [],
+      columns: [
+        { label: '权限名', prop: 'name' },
+        { label: '权限Code', prop: 'code' },
+        { label: '父级权限', prop: 'parentCode' },
+        { label: '操作项', prop: 'operate', columnSlot: true }
+      ]
     }
   },
   created () {

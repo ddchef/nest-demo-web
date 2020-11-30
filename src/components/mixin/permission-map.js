@@ -63,3 +63,25 @@ export const Permission = {
     }
   ]
 }
+
+export const BuilderTask = {
+  headerOperates: [
+    {
+      code: 'builder_rule_add',
+      label: '新增'
+    }
+  ],
+  tableOperates: [
+    {
+      code: 'builder_rule_edit',
+      label: '编辑'
+    },
+    {
+      code: 'builder_rule_delete',
+      label: '删除',
+      type: 'danger',
+      popover: true,
+      title: '确认删除？'
+    }
+  ]
+}
