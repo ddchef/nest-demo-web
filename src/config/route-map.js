@@ -90,6 +90,13 @@ export default [
             component: '/builder-rule/update.vue'
           }
         ]
+      },
+      {
+        path: 'logs',
+        id: 'builder_logs',
+        title: '打包记录',
+        isMenu: true,
+        component: '/builder-logs/index.vue'
       }
     ]
   }
