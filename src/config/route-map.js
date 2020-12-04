@@ -96,7 +96,15 @@ export default [
         id: 'builder_logs',
         title: '打包记录',
         isMenu: true,
-        component: '/builder-logs/index.vue'
+        component: '/builder-logs/index.vue',
+        children: [
+          {
+            path: ':id',
+            id: 'builder_logs_info',
+            title: '打包信息',
+            component: '/builder-logs/info.vue'
+          }
+        ]
       }
     ]
   }

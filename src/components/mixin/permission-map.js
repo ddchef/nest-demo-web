@@ -85,3 +85,14 @@ export const BuilderTask = {
     }
   ]
 }
+
+export const BuilderLogs = {
+  headerOperates: [
+  ],
+  tableOperates: [
+    {
+      code: 'builder_logs_info',
+      label: '查看'
+    }
+  ]
+}
